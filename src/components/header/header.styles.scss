@@ -19,7 +19,13 @@
     justify-content: flex-end;
 
     .option {
+      appearance: none;
+      border: none;
+      background-color: transparent;
       padding: 10px 15px;
+      font-size: inherit;
+      font-family: inherit;
+      cursor: pointer;
     }
   }
 }

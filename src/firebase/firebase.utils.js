@@ -47,17 +47,20 @@ export const signInWithGoogle = () => {
   })
 }
 
+// Creates a Firestore user document for the logged-in user if one does not already exist
 export const createUserProfileDocument = async (userAuth, additionalData) => {
   if (!userAuth) return;
 
   const userRef = doc(firestore, `users/${userAuth.uid}`)
   const userSnapshot = await getDoc(userRef)
 
+  // Only create document if it does not already exist in Firestore
   if (!userSnapshot.exists) {
     const { displayName, email } = userAuth
     const createdAt = new Date()
     
     try {
+      // Set the new user document in the database
       await setDoc(userRef, {
         displayName,
         email,
@@ -69,5 +72,6 @@ export const createUserProfileDocument = async (userAuth, additionalData) => {
     }
   }
 
+  // Return the user DocumentReference. Used for setting state in application
   return userRef
 }

@@ -36,7 +36,6 @@ class App extends React.Component {
               ...snapshot.data()
             }
           })
-          console.log(this.state)
         })
       } else {
         // user is not signed in, so userAuth will be null
@@ -50,7 +49,6 @@ class App extends React.Component {
   }
 
   render() {
-    console.log(this.state.currentUser)
     return (
       <div>
         <Header 

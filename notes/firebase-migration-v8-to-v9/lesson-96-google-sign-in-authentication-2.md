@@ -31,6 +31,13 @@ import { onSnapshot } from 'firebase/firestore'
 ```
 See below for full code.
 
+### \_\_\_[2]\_\_\_
+**Error:**
+I could not get this one to throw an error in the console, but in v9 `if (!userSnaphot.exists)` causes user data to never be stored in Firestore database.
+
+**Solution:**
+In v9, `userSnapshot.exists` has been changed from a *property* to a *function*: `userSnapshot.exists()`. If you use it the way instructed in the course, `exists` is always true because now it is a reference to a function rather than a boolean. Thus, using the property causes the if-block to never run. Change this to call `exists` as a function and your user data should be properly stored in the database.
+
 ## Yihua's repository for Lesson 96 (Firestore v8)
 
 https://github.com/ZhangMYihua/lesson-10 
@@ -94,7 +101,8 @@ export const createUserProfileDocument = async (userAuth, additionalData) => {
   // Now calls the `getDoc` function; DocumentReference is now passed as the argument
   const userSnapshot = await getDoc(userRef)
 
-  if (!userSnapshot.exists) {
+  // `.exists` is now a function on the snapshot, not a property
+  if (!userSnapshot.exists()) {
     const { displayName, email } = userAuth
     const createdAt = new Date()
     

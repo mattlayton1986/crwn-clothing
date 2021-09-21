@@ -3,7 +3,7 @@ import logger from 'redux-logger'
 
 import rootReducer from './root.reducer'
 
-const middlewares = [logger]
+const middlewares = []
 
 //Added to enable Redux DevTools extension
 const composeEnhancers = window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__ || compose

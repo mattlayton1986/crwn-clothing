@@ -1,10 +1,9 @@
 import React from 'react'
 import FormInput from '../form-input/form-input.component'
 import CustomButton from '../custom-button/custom-button.component'
-import { auth, createUserProfileDocument } from '../../firebase/firebase.utils'
-
-import './sign-up.styles.scss'
 import { createUserWithEmailAndPassword } from 'firebase/auth'
+import { auth, createUserProfileDocument } from '../../firebase/firebase.utils'
+import './sign-up.styles.scss'
 
 class SignUp extends React.Component {
   constructor() {
@@ -23,11 +22,13 @@ class SignUp extends React.Component {
 
     const { displayName, email, password, confirmPassword } = this.state
 
+    // Don't submit form if passwords don't match
     if (password !== confirmPassword) {
       alert("passwords don't match")
       return
     }
 
+    // Else try to create a user
     try {
       const { user } = await createUserWithEmailAndPassword(auth, email, password)
 

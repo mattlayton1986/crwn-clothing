@@ -1,6 +1,5 @@
 export const addItemToCart = (cartItems, cartItemToAdd) => {
-  // Check if the item we want to add to cart already exists in the
-  // user's cart.
+  // Look for the item we want to add; is it already in the cart?
   const existingCartItem = cartItems.find(
     cartItem => cartItem.id === cartItemToAdd.id
   )
@@ -22,14 +21,17 @@ export const addItemToCart = (cartItems, cartItemToAdd) => {
 }
 
 export const removeItemFromCart = (cartItems, cartItemToRemove) => {
+  // Get the item in the cart that we want to remove
   const existingCartItem = cartItems.find(
     cartItem => cartItem.id === cartItemToRemove.id
   )
 
+  // If it's the last item in the cart, remove it from the cart altogether
   if (existingCartItem.quantity === 1) {
     return cartItems.filter(cartItem => cartItem.id !== cartItemToRemove.id)
   }
 
+  // Otherwise subtract one from the item's quantity in the cart
   return cartItems.map(cartItem => 
     cartItem.id === cartItemToRemove.id ? 
     { ...cartItem, quantity: cartItem.quantity - 1 } : 

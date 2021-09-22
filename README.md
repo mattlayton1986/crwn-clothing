@@ -16,3 +16,4 @@ This project is part of the Udemy Course [Complete React Developer in 2021](http
 ## To Do: 
 - Handle sign-up form error when email already exists in database
 - Switch localStorage to sessionStorage
+- Integrate Storybook

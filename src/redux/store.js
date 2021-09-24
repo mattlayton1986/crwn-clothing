@@ -4,10 +4,14 @@ import logger from 'redux-logger'
 
 import rootReducer from './root.reducer'
 
-const middlewares = [/* logger */]
+const middlewares = []
+
+// if (process.env.NODE_ENV === 'development') {
+//   middlewares.push(logger)
+// }
 
 //Added to enable Redux DevTools extension
-const composeEnhancers = window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__ || compose
+const composeEnhancers = (process.env.NODE_ENV === 'development' && window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__) || compose
 
 // create store object from root reducer and middlewares
 const store = createStore(

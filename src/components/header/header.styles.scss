@@ -1,9 +1,15 @@
+/**
+Converted to styled-components instead of Sass.
+Styles left here for demonstration purposes, but no longer imported into the respective component.
+**/
+
 .header {
   height: 70px;
   width: 100%;
   display: flex;
   justify-content: space-between;
   margin-bottom: 25px;
+  padding: 0 80px;
 
   .logo-container {
     height: 100%;

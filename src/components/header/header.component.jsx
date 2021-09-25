@@ -1,50 +1,74 @@
 import React from 'react'
 import CartIcon from '../cart-icon/cart-icon.component'
 import CartDropdown from '../cart-dropdown/cart-dropdown.component'
-import { Link } from 'react-router-dom'
 import { auth } from '../../firebase/firebase.utils'
+import { Link } from 'react-router-dom'
 import { connect } from 'react-redux'
 import { createStructuredSelector } from 'reselect'
+import styled from 'styled-components'
 import { selectCartHidden } from '../../redux/cart/cart.selectors'
 import { selectCurrentUser } from '../../redux/user/user.selectors'
 import { ReactComponent as Logo } from '../../assets/crown.svg'
-import './header.styles.scss'
+// import './header.styles.scss'
+
+const StyledHeader = styled.header`
+  height: 70px;
+  width: 100%;
+  display: flex;
+  justify-content: space-between;
+  margin-bottom: 25px;
+`
+
+const LogoLink = styled(Link)`
+  height: 100%;
+  width: 70px;
+  padding: 25px;
+`
+
+const OptionsContainer = styled.nav`
+  width: 50%;
+  height: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: flex-end;
+`
+
+const OptionLink = styled(Link)`
+  padding: 10px 15px;
+  cursor: pointer;
+`
 
 const Header = ({ currentUser, hidden }) => (
-  <div className="header">
-    <Link to="/" className="logo-container">
+  <StyledHeader>
+    <LogoLink to="/">
       <Logo className="logo" />
-    </Link>
-    <div className="options">
-      <Link to="/shop" className="option">
+    </LogoLink>
+    <OptionsContainer>
+      <OptionLink to="/shop">
         SHOP
-      </Link>
-      <Link to="/contact" className="option">
+      </OptionLink>
+      <OptionLink to="/contact">
         CONTACT
-      </Link>
+      </OptionLink>
       {
         currentUser ? (
-          <button 
-            className="option" 
-            onClick={() => auth.signOut()}
-          >
+          <OptionLink as='div' onClick={() => auth.signOut()}>
             SIGN OUT
-          </button>
+          </OptionLink>
         ) : (
-          <Link 
-            className='option' 
+          <OptionLink 
             to='/login'
           >
             SIGN IN
-          </Link>
+          </OptionLink>
         )
       }
       <CartIcon />
-    </div>
+    </OptionsContainer>
     {
       hidden ? null : <CartDropdown />
     }
-  </div>
+  </StyledHeader>
 )
 
 const mapStateToProps = createStructuredSelector({

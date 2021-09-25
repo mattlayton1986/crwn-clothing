@@ -59,7 +59,7 @@ const CheckoutItem = ({ cartItem, clearItem, addItem, removeItem }) => {
   return (
     <StyledCheckoutItem>
       <ImageContainer>
-        <img alt="item" src={imageUrl} />
+        <img alt={name} src={imageUrl} />
       </ImageContainer>
       <TextContainer>{name}</TextContainer>
       <QuantityContainer>

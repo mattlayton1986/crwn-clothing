@@ -2,7 +2,7 @@ import React from 'react'
 import styled, { css } from 'styled-components'
 // import './form-input.styles.scss'
 
-const subColor = 'grey'
+const subColor = '#595959'
 const mainColor = 'black'
 
 const shrinkLabelStyles = css`
@@ -57,12 +57,13 @@ const InputLabel = styled.label`
 const FormInput = ({ handleChange, label, ...props }) => (
   <InputGroup>
     <InputField 
-      onChange={handleChange} 
+      onChange={handleChange}
+      id={label} 
       {...props} 
     />
     {
       label ? (
-        <InputLabel shrink={props.value.length}>
+        <InputLabel shrink={props.value.length} htmlFor={label}>
           {label}
         </InputLabel>
       ) : null

@@ -28,7 +28,8 @@ https://warm-sands-32695.herokuapp.com/
 ## To Do: 
 - Handle sign-up form error when email already exists in database
 - Switch localStorage to sessionStorage
-- Change Sign Out div to a link with preventDefault
+- Add better form error handling & messaging for SignIn/SignUp components
+- ~~Change Sign Out div to a link with preventDefault~~
 - Integrate Storybook
 - Accessibility
 - Link Heroku to Github main branch (https://devcenter.heroku.com/articles/github-integration)

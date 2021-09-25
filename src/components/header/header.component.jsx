@@ -36,6 +36,11 @@ const OptionsContainer = styled.nav`
 const OptionLink = styled(Link)`
   padding: 10px 15px;
   cursor: pointer;
+  appearance: none;
+  border: none;
+  background-color: transparent;
+  font-family: inherit;
+  font-size: inherit;
 `
 
 const Header = ({ currentUser, hidden }) => (
@@ -52,7 +57,7 @@ const Header = ({ currentUser, hidden }) => (
       </OptionLink>
       {
         currentUser ? (
-          <OptionLink as='div' onClick={() => auth.signOut()}>
+          <OptionLink as="button" onClick={() => auth.signOut()}>
             SIGN OUT
           </OptionLink>
         ) : (

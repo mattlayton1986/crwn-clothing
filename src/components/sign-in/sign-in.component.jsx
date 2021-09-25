@@ -51,13 +51,14 @@ class SignIn extends React.Component {
         <h2>I already have an account</h2>
         <span>Sign in with your email and password</span>
 
-        <form onSubmit={this.handleSubmit} autoComplete="off">
+        <form onSubmit={this.handleSubmit}>
           <FormInput 
             name="email" 
             type="email" 
             label="email"
             value={this.state.email} 
             handleChange={this.handleChange}
+            autocomplete="email"
             required 
           />
 
@@ -67,6 +68,7 @@ class SignIn extends React.Component {
             label="password"
             value={this.state.password} 
             handleChange={this.handleChange}
+            autocomplete="current-password"
             required 
           />
 

@@ -1,6 +1,13 @@
 import { initializeApp } from 'firebase/app'
 import { GoogleAuthProvider, getAuth, signInWithPopup } from 'firebase/auth'
-import { getFirestore, doc, getDoc, setDoc } from 'firebase/firestore'
+import { 
+  getFirestore, 
+  doc, 
+  getDoc, 
+  setDoc, 
+  collection, 
+  writeBatch 
+} from 'firebase/firestore'
 
 // Firebase configuration
 const firebaseConfig = {
@@ -74,4 +81,44 @@ export const createUserProfileDocument = async (userAuth, additionalData) => {
 
   // Return the user DocumentReference. Used for setting state in application
   return userRef
+}
+
+export const convertCollectionsSnapshotToMap = (collections) => {
+  const transformedCollection = collections.docs.map((doc) => {
+    const { title, items } = doc.data()
+
+    return {
+      routeName: encodeURI(title.toLowerCase()),
+      id: doc.id,
+      title,
+      items
+    }
+  })
+
+  return transformedCollection.reduce((accumulator, collection) => {
+    accumulator[collection.title.toLowerCase()] = collection
+    return accumulator
+  }, {})
+}
+
+// PRIVATE
+// Utility function to add a new collection with its documents to Firestore
+export const addCollectionAndDocuments = async (collectionKey, objectsToAdd) => {
+  // Create a collection reference in database 
+  const collectionRef = collection(firestore, collectionKey)
+  // Create a new batch write
+  const batch = writeBatch(firestore)
+  
+  // Loop over the objects to add as documents
+  objectsToAdd.forEach(obj => {
+
+    // Create new document reference from the collection reference above
+    const newDocRef = doc(collectionRef)
+    // Set this document with the object data as a batched item
+    batch.set(newDocRef, obj)
+  })
+
+  // Commit the batch once all items are set in batch, and return the results of the batch write
+  // (Returning here gives us feedback on whether the batch was successful or failed.)
+  return await batch.commit()
 }

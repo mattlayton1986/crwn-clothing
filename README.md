@@ -29,6 +29,8 @@ https://warm-sands-32695.herokuapp.com/
 - Handle sign-up form error when email already exists in database
 - Switch localStorage to sessionStorage
 - Add better form error handling & messaging for SignIn/SignUp components
+- Link Collections Preview titles to individual collection pages
+- Add Clear Cart functionality to clear local storage cart data
 - ~~Change Sign Out div to a link with preventDefault~~
 - Integrate Storybook
 - Accessibility

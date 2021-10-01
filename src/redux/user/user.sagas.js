@@ -1,18 +1,24 @@
 import { takeLatest, put, all, call } from 'redux-saga/effects'
 import UserActionTypes from './user.types'
-import { signInWithPopup, signInWithEmailAndPassword } from '@firebase/auth'
+import { 
+  signInWithPopup, 
+  signInWithEmailAndPassword,
+  createUserWithEmailAndPassword
+} from '@firebase/auth'
 import { getDoc } from '@firebase/firestore'
 import { 
   auth, 
   googleProvider, 
   createUserProfileDocument, 
-  getCurrentUser
+  getCurrentUser,
 } from '../../firebase/firebase.utils'
 import { 
   signInSuccess, 
   signInFailure,
   signOutSuccess,
-  signOutFailure
+  signOutFailure,
+  signUpSuccess,
+  signUpFailure
 } from './user.actions'
 
 // Reusable generator function for both google and email/pw sign ins below
@@ -44,6 +50,10 @@ export function* onEmailSignInStart() {
 
 export function* onSignOutStart() {
   yield takeLatest(UserActionTypes.SIGN_OUT_START, signOut)
+}
+
+export function* onSignUpStart() {
+  yield takeLatest(UserActionTypes.SIGN_UP_START, signUp)
 }
 
 
@@ -85,12 +95,30 @@ export function* signOut() {
   }
 }
 
+export function* signUp({ 
+  payload : { displayName, email, password, confirmPassword }
+}) {
+  try {
+    if (password !== confirmPassword) {
+      yield put(signUpFailure('Passwords do not match'))
+      return
+    }
+
+    const { user } = yield createUserWithEmailAndPassword(auth, email, password)
+    yield put(signUpSuccess())
+    yield getSnapshotFromUserAuth({...user, displayName})
+  } catch (error) {
+    put(signUpFailure(error))
+  }
+}
+
 // Combine all sagas into one for export to root saga
 export function* userSagas() {
   yield all([
     call(onCheckUserSession),
     call(onGoogleSignInStart),
     call(onEmailSignInStart),
-    call(onSignOutStart)
+    call(onSignOutStart),
+    call(onSignUpStart)
   ])
 }

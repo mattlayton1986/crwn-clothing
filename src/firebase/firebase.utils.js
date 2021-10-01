@@ -1,5 +1,10 @@
 import { initializeApp } from 'firebase/app'
-import { GoogleAuthProvider, getAuth, signInWithPopup } from 'firebase/auth'
+import { 
+  GoogleAuthProvider, 
+  getAuth, 
+  signInWithPopup,
+  onAuthStateChanged
+} from 'firebase/auth'
 import { 
   getFirestore, 
   doc, 
@@ -24,8 +29,8 @@ const firebaseConfig = {
 initializeApp(firebaseConfig)
 
 // Initialize Auth provider
-const provider = new GoogleAuthProvider();
-provider.setCustomParameters({ prompt: 'select_account' })
+export const googleProvider = new GoogleAuthProvider();
+googleProvider.setCustomParameters({ prompt: 'select_account' })
 
 // Firestore
 export const firestore = getFirestore()
@@ -35,7 +40,7 @@ export const auth = getAuth()
 
 // Sign in with Google
 export const signInWithGoogle = () => {
-  signInWithPopup(auth, provider)
+  signInWithPopup(auth, googleProvider)
   .catch((error) => {
     // Handle errors here
     const errorCode = error.code
@@ -99,6 +104,15 @@ export const convertCollectionsSnapshotToMap = (collections) => {
     accumulator[collection.title.toLowerCase()] = collection
     return accumulator
   }, {})
+}
+
+export const getCurrentUser = () => {
+  return new Promise((resolve, reject) => {
+    const unsubscribe = onAuthStateChanged(auth, userAuth => {
+      unsubscribe()
+      resolve(userAuth)
+    }, reject)
+  })
 }
 
 // PRIVATE

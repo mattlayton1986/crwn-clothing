@@ -25,6 +25,7 @@ https://warm-sands-32695.herokuapp.com/
 #### Post-deployment refactors
 - Styled Components: https://styled-components.com/
 - Redux Thunk: https://github.com/reduxjs/redux-thunk
+- Redux Saga: https://github.com/redux-saga/redux-saga
 
 ## To Do: 
 - Handle sign-up form error when email already exists in database

@@ -18,71 +18,68 @@ const ButtonWrapper = styled.div`
   justify-content: space-between;
 `
 
-class SignIn extends React.Component {
-  constructor() {
-    super();
+const SignIn = ({ emailSignInStart, googleSignInStart }) => {
+  const [userCredentials, setUserCredentials] = React.useState({
+    email: '',
+    password: '',
+  })
 
-    this.state = {
-      email: '',
-      password: '',
-    }
-  }
+  const { email, password } = userCredentials;
 
-  handleSubmit = async (event) => {
+  const handleSubmit = async (event) => {
     event.preventDefault()
-    const { emailSignInStart } = this.props
-    const { email, password } = this.state;
 
     emailSignInStart(email, password)
   }
 
-  handleChange = (event) => {
+  const handleChange = (event) => {
     const { value, name } = event.target
-    this.setState({ [name]: value })
+    setUserCredentials({
+      ...userCredentials,
+      [name]: value 
+    })
   }
 
-  render() {
-    const { googleSignInStart } = this.props
-    return (
-      <StyledSignIn>
-        <h2>I already have an account</h2>
-        <span>Sign in with your email and password</span>
 
-        <form onSubmit={this.handleSubmit}>
-          <FormInput 
-            name="email" 
-            type="email" 
-            label="email"
-            value={this.state.email} 
-            handleChange={this.handleChange}
-            autocomplete="email"
-            required 
-          />
+  return (
+    <StyledSignIn>
+      <h2>I already have an account</h2>
+      <span>Sign in with your email and password</span>
 
-          <FormInput 
-            name="password" 
-            type="password" 
-            label="password"
-            value={this.state.password} 
-            handleChange={this.handleChange}
-            autocomplete="current-password"
-            required 
-          />
+      <form onSubmit={handleSubmit}>
+        <FormInput 
+          name="email" 
+          type="email" 
+          label="email"
+          value={email} 
+          handleChange={handleChange}
+          autocomplete="email"
+          required 
+        />
 
-          <ButtonWrapper>
-            <CustomButton type="submit">Sign In</CustomButton>
-            <CustomButton 
-              type="button" 
-              onClick={googleSignInStart} 
-              isGoogleSignIn
-            >
-              Sign In With Google
-            </CustomButton>
-          </ButtonWrapper>
-        </form>
-      </StyledSignIn>
-    )
-  }
+        <FormInput 
+          name="password" 
+          type="password" 
+          label="password"
+          value={password} 
+          handleChange={handleChange}
+          autocomplete="current-password"
+          required 
+        />
+
+        <ButtonWrapper>
+          <CustomButton type="submit">Sign In</CustomButton>
+          <CustomButton 
+            type="button" 
+            onClick={googleSignInStart} 
+            isGoogleSignIn
+          >
+            Sign In With Google
+          </CustomButton>
+        </ButtonWrapper>
+      </form>
+    </StyledSignIn>
+  )
 }
 
 const mapDispatchToProps = dispatch => ({

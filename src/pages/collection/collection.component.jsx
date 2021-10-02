@@ -26,15 +26,16 @@ const ItemsContainer = styled.section`
 const CollectionPage = ({ collection }) => {
   const { title, items } = collection
   return (
-  <StyledCollectionPage>
-    <h2 className="title">{title}</h2>
-    <ItemsContainer>
-      {
-        items.map(item => <CollectionItem key={item.id} item={item} />)
-      }
-    </ItemsContainer>
-  </StyledCollectionPage>
-)}
+    <StyledCollectionPage>
+      <h2 className="title">{title}</h2>
+      <ItemsContainer>
+        {
+          items.map(item => <CollectionItem key={item.id} item={item} />)
+        }
+      </ItemsContainer>
+    </StyledCollectionPage>
+  )
+}
 
 const mapStateToProps = (state, ownProps) => ({
   collection: selectCollection(ownProps.match.params.collectionId)(state)

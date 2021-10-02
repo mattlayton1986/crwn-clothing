@@ -13,34 +13,31 @@ import { connect } from 'react-redux'
 
 import './App.css';
 
-class App extends React.Component {
+const App = ({ checkUserSession, currentUser }) => {
 
-  componentDidMount() {
-    const { checkUserSession } = this.props
-    checkUserSession();
-  }
+  React.useEffect(() => {
+    checkUserSession()
+  }, [checkUserSession])
 
-  render() {
-    return (
-      <div>
-        <Header />
-        <Switch>
-          <Route path="/checkout" component={CheckoutPage} />
-          <Route path="/shop" component={ShopPage} />
-          <Route 
-            path="/login" 
-            render={() => 
-              this.props.currentUser ? (
-                <Redirect to='/' /> 
-              ) : (
-                <LoginPage />
-              )} 
-          />
-          <Route path="/" component={HomePage} />
-        </Switch>
-      </div>
-    );
-  }
+  return (
+    <div>
+      <Header />
+      <Switch>
+        <Route path="/checkout" component={CheckoutPage} />
+        <Route path="/shop" component={ShopPage} />
+        <Route 
+          path="/login" 
+          render={() => 
+            currentUser ? (
+              <Redirect to='/' /> 
+            ) : (
+              <LoginPage />
+            )} 
+        />
+        <Route path="/" component={HomePage} />
+      </Switch>
+    </div>
+  );
 }
 
 const mapStateToProps = createStructuredSelector({

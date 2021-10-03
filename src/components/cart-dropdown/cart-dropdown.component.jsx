@@ -1,6 +1,6 @@
 import React from 'react'
 import { useSelector, useDispatch } from 'react-redux'
-import { withRouter } from 'react-router'
+import { useHistory } from 'react-router'
 import CartItem from '../cart-item/cart-item.component'
 import CustomButton from '../custom-button/custom-button.component'
 import styled from 'styled-components'
@@ -40,9 +40,10 @@ const CartItems = styled.ul`
   }
 `
 
-const CartDropdown = ({ history }) => {
+const CartDropdown = () => {
   const cartItems = useSelector( selectCartItems )
   const dispatch = useDispatch()
+  const history = useHistory()
 
   return (
     <StyledCartDropdown>
@@ -65,4 +66,4 @@ const CartDropdown = ({ history }) => {
   )
 }
 
-export default withRouter(CartDropdown)
+export default CartDropdown

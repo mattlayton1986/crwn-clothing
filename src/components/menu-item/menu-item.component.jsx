@@ -1,6 +1,6 @@
 import React from 'react'
 import styled from 'styled-components'
-import { withRouter } from 'react-router'
+import { useHistory, useRouteMatch } from 'react-router'
 // import './menu-item.styles.scss'
 
 const BackgroundImage = styled.div`
@@ -62,14 +62,19 @@ const StyledMenuItem = styled.article`
   }
 `
 
-const MenuItem = ({ title, size, imageUrl, linkUrl, history, match }) => (
-  <StyledMenuItem size={size} onClick={() => history.push(`${match.url}${linkUrl}`)}>
-    <BackgroundImage imageUrl={imageUrl} />
-    <Content>
-      <h1>{title.toUpperCase()}</h1>
-      <span>SHOP NOW</span>
-    </Content>
-  </StyledMenuItem>
-)
+const MenuItem = ({ title, size, imageUrl, linkUrl }) => {
+  const history = useHistory()
+  const match = useRouteMatch()
 
-export default withRouter(MenuItem)
+  return (
+    <StyledMenuItem size={size} onClick={() => history.push(`${match.url}${linkUrl}`)}>
+      <BackgroundImage imageUrl={imageUrl} />
+      <Content>
+        <h1>{title.toUpperCase()}</h1>
+        <span>SHOP NOW</span>
+      </Content>
+    </StyledMenuItem>
+  )
+}
+
+export default MenuItem

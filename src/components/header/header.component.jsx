@@ -2,8 +2,7 @@ import React from 'react'
 import CartIcon from '../cart-icon/cart-icon.component'
 import CartDropdown from '../cart-dropdown/cart-dropdown.component'
 import { Link } from 'react-router-dom'
-import { connect } from 'react-redux'
-import { createStructuredSelector } from 'reselect'
+import { useSelector, useDispatch } from 'react-redux'
 import styled from 'styled-components'
 import { signOutStart } from '../../redux/user/user.actions'
 import { selectCartHidden } from '../../redux/cart/cart.selectors'
@@ -43,46 +42,47 @@ const OptionLink = styled(Link)`
   font-size: inherit;
 `
 
-const Header = ({ currentUser, hidden, signOutStart }) => (
-  <StyledHeader>
-    <LogoLink to="/">
-      <Logo className="logo" />
-    </LogoLink>
-    <OptionsContainer>
-      <OptionLink to="/shop">
-        SHOP
-      </OptionLink>
-      <OptionLink to="/contact">
-        CONTACT
-      </OptionLink>
+const Header = () => {
+  const currentUser = useSelector( selectCurrentUser )
+  const hidden = useSelector( selectCartHidden )
+  const dispatch = useDispatch()
+
+  const handleSignOut = () => {
+    dispatch(signOutStart())
+  }
+
+  return (
+    <StyledHeader>
+      <LogoLink to="/">
+        <Logo className="logo" />
+      </LogoLink>
+      <OptionsContainer>
+        <OptionLink to="/shop">
+          SHOP
+        </OptionLink>
+        <OptionLink to="/contact">
+          CONTACT
+        </OptionLink>
+        {
+          currentUser ? (
+            <OptionLink as="button" onClick={handleSignOut}>
+              SIGN OUT
+            </OptionLink>
+          ) : (
+            <OptionLink 
+              to='/login'
+            >
+              SIGN IN
+            </OptionLink>
+          )
+        }
+        <CartIcon />
+      </OptionsContainer>
       {
-        currentUser ? (
-          <OptionLink as="button" onClick={signOutStart}>
-            SIGN OUT
-          </OptionLink>
-        ) : (
-          <OptionLink 
-            to='/login'
-          >
-            SIGN IN
-          </OptionLink>
-        )
+        hidden ? null : <CartDropdown />
       }
-      <CartIcon />
-    </OptionsContainer>
-    {
-      hidden ? null : <CartDropdown />
-    }
-  </StyledHeader>
-)
+    </StyledHeader>
+  )
+}
 
-const mapStateToProps = createStructuredSelector({
-  currentUser: selectCurrentUser,
-  hidden: selectCartHidden
-})
-
-const mapDispatchToProps = dispatch => ({
-  signOutStart: () => dispatch(signOutStart())
-})
-
-export default connect(mapStateToProps, mapDispatchToProps)(Header)
+export default Header

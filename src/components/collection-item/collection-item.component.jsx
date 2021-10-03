@@ -1,7 +1,7 @@
 import React from 'react'
 import styled from 'styled-components'
 import CustomButton from '../custom-button/custom-button.component'
-import { connect } from 'react-redux'
+import { useDispatch } from 'react-redux'
 import { addItem } from '../../redux/cart/cart.actions'
 // import './collection-item.styles.scss'
 
@@ -58,8 +58,14 @@ const ItemFooter = styled.div`
   }
 `
 
-const CollectionItem = ({ item, addItem }) => {
+const CollectionItem = ({ item }) => {
   const { name, price, imageUrl } = item
+  const dispatch = useDispatch() 
+
+  const handleAddItem = item => {
+    dispatch(addItem(item))
+  }
+
   return (
     <StyledCollectionItem>
       <ItemImage imageUrl={imageUrl} />
@@ -69,7 +75,7 @@ const CollectionItem = ({ item, addItem }) => {
       </ItemFooter>
       <AddButton 
         inverted 
-        onClick={() => addItem(item)}
+        onClick={() => handleAddItem(item)}
       >
         ADD TO CART
       </AddButton>
@@ -77,9 +83,4 @@ const CollectionItem = ({ item, addItem }) => {
   )
 }
 
-
-const mapDispatchToProps = (dispatch) => ({
-  addItem: item => dispatch(addItem(item))
-})
-
-export default connect(null, mapDispatchToProps)(CollectionItem)
+export default CollectionItem

@@ -2,7 +2,7 @@ import React from 'react'
 import FormInput from '../form-input/form-input.component'
 import CustomButton from '../custom-button/custom-button.component'
 import { signUpStart } from '../../redux/user/user.actions'
-import { connect } from 'react-redux'
+import { useDispatch } from 'react-redux'
 import styled from 'styled-components'
 // import './sign-up.styles.scss'
 
@@ -12,7 +12,8 @@ const StyledSignUp = styled.section`
   width: 380px;
 `
 
-const SignUp = ({ signUpStart }) => {
+const SignUp = () => {
+  const dispatch = useDispatch()
   const [userCredentials, setUserCredentials] = React.useState({
     displayName: '',
     email: '',
@@ -24,7 +25,7 @@ const SignUp = ({ signUpStart }) => {
 
   const handleSubmit = async (event) => {
     event.preventDefault()
-    signUpStart(userCredentials)
+    dispatch(signUpStart(userCredentials))
   }
 
   const handleChange = event => {
@@ -83,8 +84,4 @@ const SignUp = ({ signUpStart }) => {
     )
   }
 
-const mapDispatchToProps = dispatch => ({
-  signUpStart: (user) => dispatch(signUpStart(user))
-})
-
-export default connect(null, mapDispatchToProps)(SignUp)
+export default SignUp

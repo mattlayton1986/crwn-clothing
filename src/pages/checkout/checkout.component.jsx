@@ -1,8 +1,7 @@
 import React from 'react'
 import CheckoutItem from '../../components/checkout-item/checkout-item.component'
 import StripeCheckoutButton from '../../components/stripe-button/stripe-button.component'
-import { connect } from 'react-redux'
-import { createStructuredSelector } from 'reselect'
+import { useSelector } from 'react-redux'
 import styled from 'styled-components'
 import { selectCartItems, selectCartTotal } from '../../redux/cart/cart.selectors'
 // import './checkout.styles.scss'
@@ -46,50 +45,50 @@ const TestWarning = styled.aside`
   color: red;
 `
 
-const CheckoutPage = ({ cartItems, total }) => (
-  <StyledCheckoutPage>
-    <CheckoutHeader>
-      <div>
-        <span>Product</span>
-      </div>
-      <div>
-        <span>Description</span>
-      </div>
-      <div>
-        <span>Quantity</span>
-      </div>
-      <div>
-        <span>Price</span>
-      </div>
-      <div>
-        <span>Remove</span>
-      </div>
-    </CheckoutHeader>
-    {
-      cartItems.map(cartItem => (
-        <CheckoutItem key={cartItem.id} cartItem={cartItem} />
-      ))
-    }
-    <Total>
-      <span>TOTAL: ${total}</span>
-    </Total>
-    <TestWarning>
-      <p>*Please use a test credit card from the link below for payments*</p>
-      <a 
-        href="https://stripe.com/docs/testing#cards" 
-        target="_blank"
-        rel="noreferrer"
-      >
-        https://stripe.com/docs/testing#cards
-      </a>
-    </TestWarning>
-    <StripeCheckoutButton price={total} />
-  </StyledCheckoutPage>
-)
+const CheckoutPage = () => {
+  const cartItems = useSelector( selectCartItems )
+  const total = useSelector( selectCartTotal )
 
-const mapStateToProps = createStructuredSelector({
-  cartItems: selectCartItems,
-  total: selectCartTotal
-})
+  return (
+    <StyledCheckoutPage>
+      <CheckoutHeader>
+        <div>
+          <span>Product</span>
+        </div>
+        <div>
+          <span>Description</span>
+        </div>
+        <div>
+          <span>Quantity</span>
+        </div>
+        <div>
+          <span>Price</span>
+        </div>
+        <div>
+          <span>Remove</span>
+        </div>
+      </CheckoutHeader>
+      {
+        cartItems.map(cartItem => (
+          <CheckoutItem key={cartItem.id} cartItem={cartItem} />
+        ))
+      }
+      <Total>
+        <span>TOTAL: ${total}</span>
+      </Total>
+      <TestWarning>
+        <p>*Please use a test credit card from the link below for payments*</p>
+        <a 
+          href="https://stripe.com/docs/testing#cards" 
+          target="_blank"
+          rel="noreferrer"
+        >
+          https://stripe.com/docs/testing#cards
+        </a>
+      </TestWarning>
+      <StripeCheckoutButton price={total} />
+    </StyledCheckoutPage>
+  )
+}
 
-export default connect(mapStateToProps)(CheckoutPage)
+export default CheckoutPage

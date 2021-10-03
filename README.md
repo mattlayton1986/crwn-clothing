@@ -26,6 +26,11 @@ https://warm-sands-32695.herokuapp.com/
 - Styled Components: https://styled-components.com/
 - Redux Thunk: https://github.com/reduxjs/redux-thunk
 - Redux Saga: https://github.com/redux-saga/redux-saga
+- React Hooks: https://reactjs.org/docs/hooks-reference.html
+- Redux Hooks: https://react-redux.js.org/api/hooks
+- React-Router Hooks: https://reactrouter.com/web/api/Hooks
+- Express: https://expressjs.com/en/4x/api.html 
+- Axios: https://axios-http.com/docs/intro 
 
 ## To Do: 
 - Handle sign-up form error when email already exists in database

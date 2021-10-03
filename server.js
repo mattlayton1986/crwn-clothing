@@ -16,7 +16,6 @@ server.use(express.urlencoded({
 }))
 
 if (process.env.NODE_ENV === 'production') {
-  server.use(enforce.HTTPS({ trustProtoHeader: true }));
   server.use(express.static(path.join(__dirname, 'client/build')))
 
   server.get('*', (req, res) => {

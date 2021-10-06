@@ -16,6 +16,6 @@ export const typeDefs = gql`
   type Query {
     collections: [Collection!]!
     collection(id: ID!): Collection
-    getCollectionByTitle(title: String): Collection
+    getCollectionsByTitle(title: String): Collection
   }
 `;

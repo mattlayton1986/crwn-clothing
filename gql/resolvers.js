@@ -19,7 +19,7 @@ export const resolvers = {
       }
     },
     // One collection by title
-    getCollectionByTitle: async (_, { title }, ctx) => {
+    getCollectionsByTitle: async (_, { title }, ctx) => {
       try {
         // capitalize first letter of 'title'
         title = title.charAt(0).toUpperCase() + title.slice(1)

@@ -1,45 +1,83 @@
-const express = require('express')
-const path = require('path')
+import express from 'express'
+import path from 'path'
+import stripe from 'stripe'
+import dotenv from 'dotenv'
+import { ApolloServer } from 'apollo-server-express'
+import { typeDefs } from './gql/typeDefs.js'
+import { resolvers } from './gql/resolvers.js'
+import admin from 'firebase-admin'
 
 if (process.env.NODE_ENV !== 'production') {
-  require('dotenv').config()
+  dotenv.config()
 }
 
-const stripe = require('stripe')(process.env.STRIPE_SECRET_KEY)
+// Initialize Firebase Admin for backend access
+admin.initializeApp({
+  credential: admin.credential.cert(process.env.GOOGLE_APPLICATION_CREDENTIALS),
+  databaseURL: "https://crwn-clothing-994f7.firebaseio.com"
+})
 
-const server = express()
+// Create instance of Firestore database
+const firestore = admin.firestore()
+
+// Create Stripe instance
+const stripeInstance = stripe(process.env.STRIPE_SECRET_KEY)
+
+// Create Express server app
+const expressServer = express()
 const port = process.env.PORT || 5000
 
-server.use(express.json())
-server.use(express.urlencoded({
+expressServer.use(express.json())
+expressServer.use(express.urlencoded({
   extended: true
 }))
 
 if (process.env.NODE_ENV === 'production') {
-  server.use(express.static(path.join(__dirname, 'client/build')))
+  expressServer.use(express.static(path.join(__dirname, 'client/build')))
 
-  server.get('*', (req, res) => {
+  expressServer.get('*', (req, res) => {
     res.sendFile(path.join(__dirname, 'client/build', 'index.html'))
   })
 }
 
-server.listen(port, (error) => {
-  if (error) throw error
-  console.log(`Server running on port ${port}`)
-})
+// Start Apollo Server (GraphQL)
+let apolloServer = null 
+const startApolloServer = async () => {
+  apolloServer = new ApolloServer({
+    typeDefs,
+    resolvers,
+    context: () => firestore
+  })
 
-server.post('/payment', (req, res) => {
+  try {
+    await apolloServer.start()
+    apolloServer.applyMiddleware({ app: expressServer })
+  } catch (error) {
+    console.log(error)
+  }
+}
+
+startApolloServer()
+
+// Handle processing of Stripe payments
+expressServer.post('/payment', (req, res) => {
   const body = {
     source: req.body.token.id,
     amount: req.body.amount,
     currency: 'usd'
   }
 
-  stripe.charges.create(body, (stripeError, stripeResponse) => {
+  stripeInstance.charges.create(body, (stripeError, stripeResponse) => {
     if (stripeError) {
       res.status(500).send({ error: stripeError })
     } else {
       res.status(200).send({ success: stripeResponse })
     }
   })
+})
+
+// Start Express server
+expressServer.listen(port, (error) => {
+  if (error) throw error
+  console.log(`Express server running on port ${port}`)
 })

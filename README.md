@@ -31,6 +31,8 @@ https://warm-sands-32695.herokuapp.com/
 - React-Router Hooks: https://reactrouter.com/web/api/Hooks
 - Express: https://expressjs.com/en/4x/api.html 
 - Axios: https://axios-http.com/docs/intro 
+- GraphQL: https://graphql.org/
+- Apollo Server: https://www.apollographql.com/
 
 ## To Do: 
 - Handle sign-up form error when email already exists in database

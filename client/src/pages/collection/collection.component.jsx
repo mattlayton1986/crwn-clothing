@@ -22,6 +22,11 @@ const ItemsContainer = styled.section`
   & > article {
     margin-bottom: 30px;
   }
+
+  @media screen and (max-width: 800px) {
+    grid-template-columns: 1fr 1fr;
+    grid-gap: 15px;
+  }
 `
 
 const CollectionPage = () => {

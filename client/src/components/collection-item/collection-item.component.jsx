@@ -19,7 +19,14 @@ const AddButton = styled(CustomButton)`
   opacity: 0.7;
   position: absolute;
   top: 255px;
-  display:none;
+  display: none;
+
+  @media screen and (max-width: 800px) {
+    display: block;
+    opacity: 0.9;
+    min-width: unset;
+    padding: 0 10px;
+  }
 `
 
 const StyledCollectionItem = styled.article`
@@ -37,6 +44,20 @@ const StyledCollectionItem = styled.article`
     ${AddButton} {
       opacity: 0.85;
       display: flex;
+    }
+  }
+
+  @media screen and (max-width: 800px) {
+    width: 40vw;
+    &:hover {
+      ${ItemImage} {
+        opacity: unset;
+      }
+
+      ${AddButton} {
+        opacity: unset;
+        display: flex;
+      }
     }
   }
 `

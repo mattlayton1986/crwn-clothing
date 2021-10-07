@@ -60,6 +60,10 @@ const StyledMenuItem = styled.article`
       background-color: rgba(255, 255, 255, 0.9);
     }
   }
+
+  @media screen and (max-width: 800px) {
+    height: 200px;
+  }
 `
 
 const MenuItem = ({ title, size, imageUrl, linkUrl }) => {

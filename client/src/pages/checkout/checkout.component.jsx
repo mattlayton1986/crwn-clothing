@@ -7,12 +7,16 @@ import { selectCartItems, selectCartTotal } from '../../redux/cart/cart.selector
 // import './checkout.styles.scss'
 
 const StyledCheckoutPage = styled.main`
-  width: 60vw;
+  width: 55%;
   min-height: 90vh;
   display: flex;
   flex-direction: column;
   align-items: center;
   margin: 50px auto 0;
+
+  @media screen and (max-width: 800px) {
+    width: 90%;
+  }
 `
 
 const CheckoutHeader = styled.div`
@@ -28,6 +32,13 @@ const CheckoutHeader = styled.div`
 
     &:last-child {
       width: 8%;
+    }
+
+    @media screen and (max-width: 800px) {
+      width: 22%;
+      &:last-child {
+        width: 12%;
+      }
     }
   }
 `

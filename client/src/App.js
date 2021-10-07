@@ -1,5 +1,4 @@
 import React from 'react';
-
 import Header from './components/header/header.component';
 import HomePage from './pages/homepage/homepage.component';
 import ShopPage from './pages/shop/shop.component';
@@ -9,8 +8,7 @@ import { Switch, Route, Redirect } from 'react-router-dom';
 import { checkUserSession } from './redux/user/user.actions';
 import { selectCurrentUser } from './redux/user/user.selectors';
 import { useSelector, useDispatch } from 'react-redux'
-
-import './App.css';
+import GlobalStyle from './global.styles'
 
 const App = () => {
 
@@ -23,6 +21,7 @@ const App = () => {
 
   return (
     <div>
+      <GlobalStyle />
       <Header />
       <Switch>
         <Route path="/checkout" component={CheckoutPage} />

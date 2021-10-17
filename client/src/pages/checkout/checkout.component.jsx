@@ -4,7 +4,6 @@ import StripeCheckoutButton from '../../components/stripe-button/stripe-button.c
 import { useSelector } from 'react-redux'
 import styled from 'styled-components'
 import { selectCartItems, selectCartTotal } from '../../redux/cart/cart.selectors'
-// import './checkout.styles.scss'
 
 const StyledCheckoutPage = styled.main`
   width: 55%;

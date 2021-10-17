@@ -1,6 +1,5 @@
 import React from 'react'
 import styled, { css } from 'styled-components'
-// import './custom-button.styles.scss'
 
 // Variants
 const basicButton = css`

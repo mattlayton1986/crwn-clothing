@@ -3,7 +3,6 @@ import CollectionPreview from '../collection-preview/collection-preview.componen
 import { useSelector } from 'react-redux'
 import styled from 'styled-components'
 import { selectCollectionsForPreview } from '../../redux/shop/shop.selectors'
-// import './collections-overview.styles.scss'
 
 const StyledCollectionsOverview = styled.main`
   display: flex;

@@ -5,7 +5,6 @@ import CustomButton from '../custom-button/custom-button.component';
 import { googleSignInStart, emailSignInStart } from '../../redux/user/user.actions';
 import { useDispatch } from 'react-redux'
 import styled from 'styled-components';
-// import './sign-in.styles.scss'
 
 const StyledSignIn = styled.section`
   width: 380px;

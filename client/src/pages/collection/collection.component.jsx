@@ -4,7 +4,6 @@ import { useParams } from 'react-router-dom'
 import { selectCollection } from '../../redux/shop/shop.selectors'
 import styled from 'styled-components'
 import CollectionItem from '../../components/collection-item/collection-item.component'
-// import './collection.styles.scss'
 
 const StyledCollectionPage = styled.main`
   display: flex;

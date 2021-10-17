@@ -8,7 +8,6 @@ import { signOutStart } from '../../redux/user/user.actions'
 import { selectCartHidden } from '../../redux/cart/cart.selectors'
 import { selectCurrentUser } from '../../redux/user/user.selectors'
 import { ReactComponent as Logo } from '../../assets/crown.svg'
-// import './header.styles.scss'
 
 const StyledHeader = styled.header`
   height: 70px;

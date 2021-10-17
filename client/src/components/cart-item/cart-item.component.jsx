@@ -1,6 +1,5 @@
 import React from "react";
 import styled from "styled-components";
-// import './cart-item.styles.scss'
 
 const StyledCartItem = styled.li`
   width: 100%;

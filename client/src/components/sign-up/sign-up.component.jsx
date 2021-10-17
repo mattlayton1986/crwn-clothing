@@ -4,7 +4,6 @@ import CustomButton from '../custom-button/custom-button.component'
 import { signUpStart } from '../../redux/user/user.actions'
 import { useDispatch } from 'react-redux'
 import styled from 'styled-components'
-// import './sign-up.styles.scss'
 
 const StyledSignUp = styled.section`
   display: flex;

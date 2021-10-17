@@ -2,7 +2,6 @@ import React from 'react'
 import { useDispatch } from 'react-redux'
 import styled from 'styled-components'
 import { clearItemFromCart, addItem, removeItem } from '../../redux/cart/cart.actions'
-// import './checkout-item.styles.scss'
 
 const StyledCheckoutItem = styled.article`
   width: 100% ;

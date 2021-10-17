@@ -1,7 +1,6 @@
 import React from 'react'
 import styled from 'styled-components'
 import { useHistory, useRouteMatch } from 'react-router'
-// import './menu-item.styles.scss'
 
 const BackgroundImage = styled.div`
   width: 100%;

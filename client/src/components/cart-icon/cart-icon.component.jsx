@@ -4,7 +4,6 @@ import { toggleCartHidden } from '../../redux/cart/cart.actions'
 import { ReactComponent as Icon } from '../../assets/shopping-bag.svg'
 import styled from 'styled-components'
 import { selectCartItemsCount } from '../../redux/cart/cart.selectors'
-// import './cart-icon.styles.scss'
 
 const StyledCartIcon = styled.div`
   width: 45px;

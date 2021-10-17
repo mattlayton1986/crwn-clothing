@@ -3,7 +3,6 @@ import styled from 'styled-components'
 import CustomButton from '../custom-button/custom-button.component'
 import { useDispatch } from 'react-redux'
 import { addItem } from '../../redux/cart/cart.actions'
-// import './collection-item.styles.scss'
 
 const ItemImage = styled.div`
   width: 100%;

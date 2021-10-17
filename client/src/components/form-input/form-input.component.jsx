@@ -1,6 +1,5 @@
 import React from 'react'
 import styled, { css } from 'styled-components'
-// import './form-input.styles.scss'
 
 const subColor = '#595959'
 const mainColor = 'black'

@@ -6,7 +6,6 @@ import CustomButton from '../custom-button/custom-button.component'
 import styled from 'styled-components'
 import { selectCartItems } from '../../redux/cart/cart.selectors'
 import { toggleCartHidden } from '../../redux/cart/cart.actions'
-// import './cart-dropdown.styles.scss'
 
 const StyledCartDropdown = styled.aside`
   position: absolute;

@@ -17,6 +17,7 @@ const CheckoutPage = React.lazy(() =>
   import("./pages/checkout/checkout.component")
 );
 
+// Main app
 const App = () => {
   const currentUser = useSelector(selectCurrentUser);
   const dispatch = useDispatch();

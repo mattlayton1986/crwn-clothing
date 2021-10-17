@@ -1,5 +1,5 @@
-import React from 'react'
-import styled from 'styled-components'
+import React from "react";
+import styled from "styled-components";
 // import './cart-item.styles.scss'
 
 const StyledCartItem = styled.li`
@@ -10,7 +10,7 @@ const StyledCartItem = styled.li`
   img {
     width: 30%;
   }
-`
+`;
 
 const ItemDetails = styled.div`
   width: 70%;
@@ -23,16 +23,18 @@ const ItemDetails = styled.div`
     font-size: 16px;
     margin: 0;
   }
-`
+`;
 
 const CartItem = ({ item: { imageUrl, price, name, quantity } }) => (
   <StyledCartItem>
     <img src={imageUrl} alt={name} />
     <ItemDetails>
       <h3>{name}</h3>
-      <span>{quantity} x ${price}</span>
+      <span>
+        {quantity} x ${price}
+      </span>
     </ItemDetails>
   </StyledCartItem>
-)
+);
 
-export default CartItem
+export default React.memo(CartItem);

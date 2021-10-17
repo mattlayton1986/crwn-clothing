@@ -1,6 +1,6 @@
-import React from 'react'
-import Directory from '../../components/directory/directory.component'
-import styled from 'styled-components'
+import React from "react";
+import Directory from "../../components/directory/directory.component";
+import styled from "styled-components";
 // import './homepage.styles.scss'
 
 const StyledHomePage = styled.main`
@@ -12,12 +12,12 @@ const StyledHomePage = styled.main`
   @media screen and (max-width: 800px) {
     padding: 10px;
   }
-`
+`;
 
 const HomePage = () => (
   <StyledHomePage>
     <Directory />
   </StyledHomePage>
-)
+);
 
-export default HomePage
+export default HomePage;

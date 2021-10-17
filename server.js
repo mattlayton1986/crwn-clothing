@@ -7,6 +7,7 @@ import { typeDefs } from './gql/typeDefs.js'
 import { resolvers } from './gql/resolvers.js'
 import admin from 'firebase-admin'
 
+// Dev dotenv
 if (process.env.NODE_ENV !== 'production') {
   dotenv.config()
 }

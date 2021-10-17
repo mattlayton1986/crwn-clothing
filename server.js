@@ -1,14 +1,12 @@
-import express from "express";
-import path from "path";
-import stripe from "stripe";
-import dotenv from "dotenv";
-import { ApolloServer } from "apollo-server-express";
-import { typeDefs } from "./gql/typeDefs.js";
-import { resolvers } from "./gql/resolvers.js";
-import admin from "firebase-admin";
-
-// define __dirname since using ES6 module
-const __dirname = path.resolve();
+const express = require("express");
+const path = require("path");
+const stripe = require("stripe");
+const dotenv = require("dotenv");
+const { ApolloServer } = require("apollo-server-express");
+const admin = require("firebase-admin");
+const typeDefs = require("./gql/typeDefs");
+const resolvers = require("./gql/resolvers.js");
+const compression = require("compression");
 
 // Dev dotenv
 if (process.env.NODE_ENV !== "production") {
@@ -35,6 +33,7 @@ const stripeInstance = stripe(process.env.STRIPE_SECRET_KEY);
 const expressServer = express();
 const port = process.env.PORT || 5000;
 
+expressServer.use(compression());
 expressServer.use(express.json());
 expressServer.use(
   express.urlencoded({

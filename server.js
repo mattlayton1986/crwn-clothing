@@ -8,6 +8,7 @@ const typeDefs = require("./gql/typeDefs");
 const resolvers = require("./gql/resolvers.js");
 const compression = require("compression");
 const enforce = require("express-sslify");
+const cors = require("cors");
 
 // Dev dotenv
 if (process.env.NODE_ENV !== "production") {
@@ -34,15 +35,16 @@ const stripeInstance = stripe(process.env.STRIPE_SECRET_KEY);
 const expressServer = express();
 const port = process.env.PORT || 5000;
 
-expressServer.use(compression());
 expressServer.use(express.json());
 expressServer.use(
   express.urlencoded({
     extended: true,
   })
 );
+expressServer.use(cors());
 
 if (process.env.NODE_ENV === "production") {
+  expressServer.use(compression());
   expressServer.use(enforce.HTTPS({ trustProtoHeader: true }));
   expressServer.use(express.static(path.join(__dirname, "client/build")));
 

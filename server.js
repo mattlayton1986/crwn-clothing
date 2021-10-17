@@ -7,6 +7,7 @@ const admin = require("firebase-admin");
 const typeDefs = require("./gql/typeDefs");
 const resolvers = require("./gql/resolvers.js");
 const compression = require("compression");
+const enforce = require("express-sslify");
 
 // Dev dotenv
 if (process.env.NODE_ENV !== "production") {
@@ -42,6 +43,7 @@ expressServer.use(
 );
 
 if (process.env.NODE_ENV === "production") {
+  expressServer.use(enforce.HTTPS({ trustProtoHeader: true }));
   expressServer.use(express.static(path.join(__dirname, "client/build")));
 
   expressServer.get("*", (req, res) => {
@@ -67,6 +69,10 @@ const startApolloServer = async () => {
 };
 
 startApolloServer();
+
+expressServer.get("/service-worker.js", (req, res) => {
+  res.sendFile(path.resolve(__dirname, "..", "build", "service-worker.js"));
+});
 
 // Handle processing of Stripe payments
 expressServer.post("/payment", (req, res) => {

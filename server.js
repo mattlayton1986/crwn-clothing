@@ -7,6 +7,9 @@ import { typeDefs } from "./gql/typeDefs.js";
 import { resolvers } from "./gql/resolvers.js";
 import admin from "firebase-admin";
 
+// define __dirname since using ES6 module
+const __dirname = path.resolve();
+
 // Dev dotenv
 if (process.env.NODE_ENV !== "production") {
   dotenv.config();

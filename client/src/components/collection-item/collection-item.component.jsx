@@ -4,16 +4,18 @@ import CustomButton from '../custom-button/custom-button.component'
 import { useDispatch } from 'react-redux'
 import { addItem } from '../../redux/cart/cart.actions'
 
-const ItemImage = styled.div`
+export const ItemImage = styled.div`
   width: 100%;
   height: 95%;
-  background-image: url(${({imageUrl}) => imageUrl});
+  background-image: url(${({ imageUrl }) => imageUrl});
   background-size: cover;
   background-position: center;
   margin-bottom: 5px;
-`
+`;
 
-const AddButton = styled(CustomButton)`
+ItemImage.displayName = "ItemImage";
+
+export const AddButton = styled(CustomButton)`
   width: 80%;
   opacity: 0.7;
   position: absolute;
@@ -26,9 +28,11 @@ const AddButton = styled(CustomButton)`
     min-width: unset;
     padding: 0 10px;
   }
-`
+`;
 
-const StyledCollectionItem = styled.article`
+AddButton.displayName = "AddButton";
+
+export const StyledCollectionItem = styled.article`
   width: 22vw;
   display: flex;
   flex-direction: column;
@@ -59,48 +63,54 @@ const StyledCollectionItem = styled.article`
       }
     }
   }
-`
+`;
 
-const ItemFooter = styled.div`
+StyledCollectionItem.displayName = "StyledCollectionItem";
+
+export const ItemFooter = styled.div`
   width: 100%;
   height: 5%;
   display: flex;
   justify-content: space-between;
   font-size: 18px;
-  .name {
-    width: 90%;
-    margin-bottom: 15px;
-  }
+`;
 
-  .price {
-    width: 10%;
-    text-align: right;
-  }
-`
+ItemFooter.displayName = "ItemFooter";
+
+export const NameContainer = styled.span`
+  width: 90%;
+  margin-bottom: 15px;
+`;
+
+NameContainer.displayName = "NameContainer";
+
+export const PriceContainer = styled.span`
+  width: 10%;
+  text-align: right;
+`;
+
+PriceContainer.displayName = "PriceContainer";
 
 const CollectionItem = ({ item }) => {
-  const { name, price, imageUrl } = item
-  const dispatch = useDispatch() 
+  const { name, price, imageUrl } = item;
+  const dispatch = useDispatch();
 
-  const handleAddItem = item => {
-    dispatch(addItem(item))
-  }
+  const handleAddItem = (item) => {
+    dispatch(addItem(item));
+  };
 
   return (
     <StyledCollectionItem>
       <ItemImage imageUrl={imageUrl} />
       <ItemFooter>
-        <span className="name">{ name }</span>
-        <span className="price">${ price }</span>
+        <NameContainer>{name}</NameContainer>
+        <PriceContainer>${price}</PriceContainer>
       </ItemFooter>
-      <AddButton 
-        inverted 
-        onClick={() => handleAddItem(item)}
-      >
+      <AddButton inverted onClick={() => handleAddItem(item)}>
         ADD TO CART
       </AddButton>
     </StyledCollectionItem>
-  )
-}
+  );
+};
 
 export default CollectionItem

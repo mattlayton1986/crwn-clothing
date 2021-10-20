@@ -5,7 +5,7 @@ import { ReactComponent as Icon } from '../../assets/shopping-bag.svg'
 import styled from 'styled-components'
 import { selectCartItemsCount } from '../../redux/cart/cart.selectors'
 
-const StyledCartIcon = styled.div`
+export const StyledCartIcon = styled.div`
   width: 45px;
   height: 45px;
   position: relative;
@@ -13,19 +13,25 @@ const StyledCartIcon = styled.div`
   align-items: center;
   justify-content: center;
   cursor: pointer;
-`
+`;
 
-const ShoppingIcon = styled(Icon)`
+StyledCartIcon.displayName = "StyledCartIcon";
+
+export const ShoppingIcon = styled(Icon)`
   width: 24px;
   height: 24px;
-`
+`;
 
-const ItemCount = styled.span`
+ShoppingIcon.displayName = "ShoppingIcon";
+
+export const ItemCount = styled.span`
   position: absolute;
   font-size: 10px;
   font-weight: bold;
   bottom: 12px;
-`
+`;
+
+ItemCount.displayName = "ItemCount";
 
 const CartIcon = () => {
   const itemCount = useSelector( selectCartItemsCount ) 

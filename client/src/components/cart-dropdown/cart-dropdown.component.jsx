@@ -1,13 +1,13 @@
-import React from 'react'
-import { useSelector, useDispatch } from 'react-redux'
-import { useHistory } from 'react-router'
-import CartItem from '../cart-item/cart-item.component'
-import CustomButton from '../custom-button/custom-button.component'
-import styled from 'styled-components'
-import { selectCartItems } from '../../redux/cart/cart.selectors'
-import { toggleCartHidden } from '../../redux/cart/cart.actions'
+import React from "react";
+import { useSelector, useDispatch } from "react-redux";
+import { useHistory } from "react-router";
+import CartItem from "../cart-item/cart-item.component";
+import CustomButton from "../custom-button/custom-button.component";
+import styled from "styled-components";
+import { selectCartItems } from "../../redux/cart/cart.selectors";
+import { toggleCartHidden } from "../../redux/cart/cart.actions";
 
-const StyledCartDropdown = styled.aside`
+export const StyledCartDropdown = styled.aside`
   position: absolute;
   width: 240px;
   height: 340px;
@@ -19,13 +19,24 @@ const StyledCartDropdown = styled.aside`
   top: 90px;
   right: 40px;
   z-index: 5;
-  
-  & > button {
-    margin-top: auto;
-  }
-`
+`;
 
-const CartItems = styled.ul`
+StyledCartDropdown.displayName = "StyledCartDropdown";
+
+export const StyledCartDropdownButton = styled(CustomButton)`
+  margin-top: auto;
+`;
+
+StyledCartDropdownButton.displayName = "StyledCartDropdownButton";
+
+export const EmptyMessageContainer = styled.span`
+  font-size: 18px;
+  margin: 50px auto;
+`;
+
+// EmptyMessageContainer.displayName = "EmptyMessageContainer";
+
+export const CartItems = styled.ul`
   height: 240px;
   display: flex;
   flex-direction: column;
@@ -33,36 +44,36 @@ const CartItems = styled.ul`
   padding: 0;
   margin: 0;
   list-style-type: none;
-  > span {
-    font-size: 18px;
-    margin: 50px auto;
-  }
-`
+`;
+
+CartItems.displayName = "CartItems";
 
 const CartDropdown = () => {
-  const cartItems = useSelector( selectCartItems )
-  const dispatch = useDispatch()
-  const history = useHistory()
+  const cartItems = useSelector(selectCartItems);
+  const dispatch = useDispatch();
+  const history = useHistory();
 
   return (
     <StyledCartDropdown>
       <CartItems>
-        {
-          cartItems.length ?
-          cartItems.map(cartItem => (
+        {cartItems.length ? (
+          cartItems.map((cartItem) => (
             <CartItem key={cartItem.id} item={cartItem} />
-          )) :
-          <span>Your cart is empty</span>
-        }
+          ))
+        ) : (
+          <EmptyMessageContainer>Your cart is empty</EmptyMessageContainer>
+        )}
       </CartItems>
-      <CustomButton onClick={() => {
-        history.push('/checkout')
-        dispatch(toggleCartHidden())
-      }}>
+      <StyledCartDropdownButton
+        onClick={() => {
+          history.push("/checkout");
+          dispatch(toggleCartHidden());
+        }}
+      >
         GO TO CHECKOUT
-      </CustomButton>
+      </StyledCartDropdownButton>
     </StyledCartDropdown>
-  )
-}
+  );
+};
 
-export default CartDropdown
+export default CartDropdown;

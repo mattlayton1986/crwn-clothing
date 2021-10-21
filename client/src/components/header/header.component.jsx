@@ -9,7 +9,7 @@ import { selectCartHidden } from '../../redux/cart/cart.selectors'
 import { selectCurrentUser } from '../../redux/user/user.selectors'
 import { ReactComponent as Logo } from '../../assets/crown.svg'
 
-const StyledHeader = styled.header`
+export const StyledHeader = styled.header`
   height: 70px;
   width: 100%;
   display: flex;
@@ -21,9 +21,11 @@ const StyledHeader = styled.header`
     padding: 10px;
     margin-bottom: 20px;
   }
-`
+`;
 
-const LogoLink = styled(Link)`
+StyledHeader.displayName = "StyledHeader";
+
+export const LogoLink = styled(Link)`
   height: 100%;
   width: 70px;
   padding: 25px;
@@ -32,9 +34,11 @@ const LogoLink = styled(Link)`
     width: 50px;
     padding: 0;
   }
-`
+`;
 
-const OptionsContainer = styled.nav`
+LogoLink.displayName = "LogoLink";
+
+export const OptionsContainer = styled.nav`
   width: 50%;
   height: 100%;
   display: flex;
@@ -44,9 +48,11 @@ const OptionsContainer = styled.nav`
   @media screen and (max-width: 800px) {
     width: 80%;
   }
-`
+`;
 
-const OptionLink = styled(Link)`
+OptionsContainer.displayName = "OptionsContainer";
+
+export const OptionLink = styled(Link)`
   padding: 10px 15px;
   cursor: pointer;
   appearance: none;
@@ -54,7 +60,9 @@ const OptionLink = styled(Link)`
   background-color: transparent;
   font-family: inherit;
   font-size: inherit;
-`
+`;
+
+OptionLink.displayName = "OptionLink";
 
 const Header = () => {
   const currentUser = useSelector( selectCurrentUser )

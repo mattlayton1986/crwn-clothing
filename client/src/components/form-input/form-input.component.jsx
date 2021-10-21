@@ -10,16 +10,17 @@ const shrinkLabelStyles = css`
   color: ${mainColor};
 `
 
-const InputGroup = styled.div`
+export const InputGroup = styled.div`
   position: relative;
   margin: 45px 0;
 
   input[type="password"] {
     letter-spacing: 0.3em;
   }
-`
+`;
+InputGroup.displayName = "InputGroup";
 
-const InputField = styled.input`
+export const InputField = styled.input`
   background: none;
   background-color: white;
   color: ${subColor};
@@ -39,9 +40,11 @@ const InputField = styled.input`
   &:focus ~ label {
     ${shrinkLabelStyles}
   }
-`
+`;
 
-const InputLabel = styled.label`
+InputField.displayName = "InputField";
+
+export const InputLabel = styled.label`
   color: ${subColor};
   font-size: 16px;
   font-weight: normal;
@@ -50,8 +53,10 @@ const InputLabel = styled.label`
   left: 5px;
   top: 10px;
   transition: 300ms ease all;
-  ${({ shrink }) => shrink ? shrinkLabelStyles : null}
-`
+  ${({ shrink }) => (shrink ? shrinkLabelStyles : null)}
+`;
+
+InputLabel.displayName = "InputLabel";
 
 const FormInput = ({ handleChange, label, ...props }) => (
   <InputGroup>

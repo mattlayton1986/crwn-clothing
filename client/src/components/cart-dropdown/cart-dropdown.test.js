@@ -16,6 +16,7 @@ describe("CartDropdown component", () => {
 
   beforeEach(() => {
     mockCartItems = [{ id: 1 }, { id: 2 }, { id: 3 }];
+    mockToggleCartHidden = jest.fn();
 
     // Mock useSelector hook
     spyOnUseSelector = jest.spyOn(redux, "useSelector");
@@ -23,7 +24,6 @@ describe("CartDropdown component", () => {
 
     // Mock useDispatch hook
     spyOnUseDispatch = jest.spyOn(redux, "useDispatch");
-    mockToggleCartHidden = jest.fn();
     spyOnUseDispatch.mockReturnValue(mockToggleCartHidden);
 
     wrapper = shallow(<CartDropdown />);

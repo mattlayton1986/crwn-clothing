@@ -2,6 +2,7 @@ import React from "react";
 import { shallow, mount } from "enzyme";
 import * as redux from "react-redux";
 
+
 import CartDropdown, { EmptyMessageContainer } from "./cart-dropdown.component";
 import CartItem from "../cart-item/cart-item.component";
 
